@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missão: Identidade Visual | Prof. Johnny Braga de Oliveira</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cor-primaria: #1a237e; /* Azul escuro, quase índigo */
+            --cor-secundaria: #3949ab; /* Azul médio */
+            --cor-acento: #5c6bc0; /* Azul claro */
+            --cor-destaque: #ffab40; /* Laranja/Âmbar para destaque */
+            --cor-fundo: #f8f9fa;
+            --cor-caixa: #ffffff;
+            --cor-texto: #212529;
+            --cor-texto-claro: #495057;
+            --cor-borda: #e9ecef;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--cor-texto );
+            background-color: var(--cor-fundo);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 40px;
+            background-color: var(--cor-caixa);
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+        header {
+            text-align: center;
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            color: white;
+            padding: 40px;
+            margin: -40px -40px 40px -40px;
+            border-radius: 16px 16px 0 0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+        header .subtitle {
+            margin: 10px 0 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        h2 {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: var(--cor-primaria);
+            border-bottom: 3px solid var(--cor-destaque);
+            padding-bottom: 15px;
+            margin-top: 50px;
+        }
+        h3 {
+            font-size: 1.5em;
+            color: var(--cor-secundaria);
+        }
+        details {
+            background-color: var(--cor-caixa);
+            border: 1px solid var(--cor-borda);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+        details:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        summary {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: var(--cor-primaria);
+            padding: 25px;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::after {
+            content: '→';
+            font-size: 1.5em;
+            color: var(--cor-destaque);
+            transition: transform 0.3s ease;
+        }
+        details[open] summary::after {
+            transform: rotate(90deg);
+        }
+        .details-content {
+            padding: 0 25px 25px;
+            border-top: 1px solid var(--cor-borda);
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--cor-borda);
+        }
+        .card h4 {
+            margin-top: 0;
+            color: var(--cor-secundaria);
+            border-bottom: 2px solid var(--cor-acento);
+            padding-bottom: 8px;
+        }
+        .color-swatch {
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: middle;
+            border: 2px solid white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .gestalt-example {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .gestalt-example img {
+            max-width: 100%;
+            height: auto;
+        }
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--cor-borda);
+        }
+        footer p {
+            font-size: 1.1em;
+            color: var(--cor-texto-claro);
+        }
+        footer strong {
+            color: var(--cor-primaria);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Missão: A Identidade Visual do Cliente</h1>
+            <p class="subtitle">Uma jornada prática de Design e Front-end</p>
+        </header>
+
+        <details open>
+            <summary>Relembrando Nossos Superpoderes</summary>
+            <div class="details-content">
+                <p>Antes de começarmos nossa missão, vamos revisar as ferramentas que já conquistamos. Elas são a base para o sucesso deste projeto.</p>
+                <div class="grid-container">
+                    <div class="card">
+                        <h4>Metodologias Ágeis</h4>
+                        <p><strong>Scrum & Kanban</strong> não são apenas palavras da moda. São nossas ferramentas para organizar o caos, visualizar o progresso e entregar valor de forma rápida e eficiente. Neste projeto, o <strong>Kanban</strong> será nosso mapa, mostrando o caminho de cada tarefa, do <code>Backlog</code> ao <code>Done</code>.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Psicologia das Cores</h4>
+                        <p>Cores comunicam emoções e ideias antes mesmo de uma única palavra ser lida. A escolha certa pode definir o sucesso de uma marca.</p>
+                        <span class="color-swatch" style="background-color: #e53935;"></span> Vermelho: Energia, Paixão  
+
+                        <span class="color-swatch" style="background-color: #43a047;"></span> Verde: Natureza, Saúde, Calma  
+
+                        <span class="color-swatch" style="background-color: #1e88e5;"></span> Azul: Confiança, Tecnologia  
+
+                        <span class="color-swatch" style="background-color: #fdd835;"></span> Amarelo: Otimismo, Alegria
+                    </div>
+                    <div class="card">
+                        <h4>Gestalt: A Mágica da Percepção</h4>
+                        <p>Nosso cérebro é uma máquina de criar ordem. A Gestalt nos ensina a usar isso a nosso favor para criar designs claros e intuitivos.</p>
+                        <div class="gestalt-example">
+                            <img src="https://i.imgur.com/g0KzE1L.png" alt="Exemplos de Proximidade e Semelhança da Gestalt">
+                            <small><strong>Proximidade:</strong> Itens próximos são um grupo. <strong>Semelhança:</strong> Itens parecidos são um grupo.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <section>
+            <h2>O Desafio: Do Briefing à Identidade Visual</h2>
+            <p>Agora, a missão. Em duplas, vocês irão mergulhar no universo um do outro. Um será o <strong>Designer</strong>, o outro, o <strong>Cliente</strong>. O objetivo é traduzir a personalidade, os valores e os sonhos do seu cliente em uma identidade visual completa e profissional. Depois, os papéis se invertem.</p>
+        </section>
+
+        <details>
+            <summary>As 4 Fases da Missão</summary>
+            <div class="details-content">
+                <h3>1. A Descoberta (Entrevista e Kanban )</h3>
+                <p>O Designer cria o quadro Kanban e conduz uma entrevista profunda (briefing) para extrair a alma da marca do cliente.</p>
+                <h3>2. A Concepção (Moodboard e Criação)</h3>
+                <p>As ideias se transformam em um conceito visual (moodboard), que guiará a criação do logo, da paleta de cores e da tipografia.</p>
+                <h3>3. A Revelação (Apresentação e Validação)</h3>
+                <p>O Designer apresenta o projeto, justificando cada escolha. O Cliente avalia e dá o feedback: a identidade o representa?</p>
+                <h3>4. A Virada (Inversão de Papéis)</h3>
+                <p>A dupla troca de chapéu e a jornada recomeça, garantindo que todos vivenciem os dois lados da moeda.</p>
+            </div>
+        </details>
+
+        <details>
+            <summary>Inspiração: Exemplos Práticos</summary>
+            <div class="details-content">
+                <div class="grid-container">
+                    <div class="card">
+                        <h4>Exemplo 1: "Ana" (Orgânica e Minimalista)</h4>
+                        <p><strong>Briefing:</strong> Fotografia, plantas, calma, minimalismo.</p>
+                        <p><strong>Solução:</strong> Tons terrosos, fontes elegantes e um logo que une a inicial "A" a uma folha.</p>
+                        <img src="https://i.imgur.com/k6pX4Yc.png" alt="Exemplo de aplicação da identidade visual de Ana" style="width:100%; border-radius: 8px;">
+                    </div>
+                    <div class="card">
+                        <h4>Exemplo 2: "Lucas" (Tech e Futurista )</h4>
+                        <p><strong>Briefing:</strong> Gamer, hardware, inovação, neon.</p>
+                        <p><strong>Solução:</strong> Paleta "dark mode" com roxo e ciano, fontes geométricas e um logo que remete a um chip.</p>
+                        <img src="https://i.imgur.com/uQf5w2D.png" alt="Exemplo de aplicação da identidade visual de Lucas" style="width:100%; border-radius: 8px;">
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>Arsenal: Ferramentas e Avaliação</summary>
+            <div class="details-content">
+                <h3>Guia de Feedback Construtivo</h3>
+                <p>Lembrem-se: feedback é um presente. Para o <strong>Cliente</strong>: seja específico, justifique e comece pelos pontos positivos. Para o <strong>Designer</strong>: ouça, não leve para o lado pessoal e agradeça a oportunidade de melhorar.</p>
+                <h3>Critérios de Avaliação</h3>
+                <p>Vocês serão avaliados em 4 áreas: <strong>Processo e Metodologia (25% )</strong>, <strong>Conceituação (30%)</strong>, <strong>Execução Técnica (30%)</strong> e <strong>Comunicação (15%)</strong>. A rúbrica detalhada será compartilhada para garantir total transparência.</p>
+            </div>
+        </details>
+
+        <footer>
+            <p>Apresentado por <strong>Professor Johnny Braga de Oliveira</strong></p>
+            <p>Escola SENAI "Morvan Figueiredo"</p>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('details').forEach((detail) => {
+            detail.addEventListener('toggle', (event) => {
+                if (detail.open) {
+                    document.querySelectorAll('details').forEach((otherDetail) => {
+                        if (otherDetail !== detail) {
+                            otherDetail.removeAttribute('open');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
