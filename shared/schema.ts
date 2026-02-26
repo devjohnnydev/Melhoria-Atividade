@@ -1,18 +1,24 @@
-import { sql } from "drizzle-orm";
-import { pgTable, text, varchar } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
-export const users = pgTable("users", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  username: text("username").notNull().unique(),
-  password: text("password").notNull(),
+export const teams = pgTable("teams", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  designerName: text("designer_name").notNull(),
+  clientName: text("client_name").notNull(),
+  currentPhase: integer("current_phase").notNull().default(1),
 });
 
-export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
+export const insertTeamSchema = createInsertSchema(teams).omit({ 
+  id: true,
+  currentPhase: true
 });
 
-export type InsertUser = z.infer<typeof insertUserSchema>;
-export type User = typeof users.$inferSelect;
+export type Team = typeof teams.$inferSelect;
+export type InsertTeam = z.infer<typeof insertTeamSchema>;
+
+export type CreateTeamRequest = InsertTeam;
+export type UpdatePhaseRequest = { phase: number };
+export type TeamResponse = Team;
+export type TeamsListResponse = Team[];

@@ -1,38 +1,41 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { randomUUID } from "crypto";
-
-// modify the interface with any CRUD methods
-// you might need
+import { db } from "./db";
+import {
+  teams,
+  type CreateTeamRequest,
+  type UpdatePhaseRequest,
+  type TeamResponse
+} from "@shared/schema";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  getTeams(): Promise<TeamResponse[]>;
+  getTeam(id: number): Promise<TeamResponse | undefined>;
+  createTeam(team: CreateTeamRequest): Promise<TeamResponse>;
+  updateTeamPhase(id: number, phase: number): Promise<TeamResponse>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-
-  constructor() {
-    this.users = new Map();
+export class DatabaseStorage implements IStorage {
+  async getTeams(): Promise<TeamResponse[]> {
+    return await db.select().from(teams);
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+  async getTeam(id: number): Promise<TeamResponse | undefined> {
+    const [team] = await db.select().from(teams).where(eq(teams.id, id));
+    return team;
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+  async createTeam(team: CreateTeamRequest): Promise<TeamResponse> {
+    const [created] = await db.insert(teams).values(team).returning();
+    return created;
   }
 
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+  async updateTeamPhase(id: number, phase: number): Promise<TeamResponse> {
+    const [updated] = await db.update(teams)
+      .set({ currentPhase: phase })
+      .where(eq(teams.id, id))
+      .returning();
+    return updated;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
