@@ -5,8 +5,8 @@ import { z } from "zod";
 export const teams = pgTable("teams", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  designerName: text("designer_name").notNull(),
-  clientName: text("client_name").notNull(),
+  techLeadName: text("tech_lead_name").notNull(),
+  productOwnerName: text("product_owner_name").notNull(),
   currentPhase: integer("current_phase").notNull().default(1),
 });
 
