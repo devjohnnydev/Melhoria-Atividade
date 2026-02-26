@@ -10,9 +10,13 @@ import {
   PenTool,
   Presentation,
   Rocket,
-  CheckCircle2
+  CheckCircle2,
+  Download,
+  FileText
 } from "lucide-react";
 import { Link } from "wouter";
+import { jsPDF } from "jspdf";
+import autoTable from "jspdf-autotable";
 
 const phases = [
   {
@@ -67,6 +71,78 @@ export default function Home() {
             >
               Começar a Missão <ArrowRight className="w-5 h-5" />
             </Link>
+            <button 
+              onClick={() => {
+                const doc = new jsPDF();
+                
+                // Configurações do PDF
+                doc.setFontSize(22);
+                doc.setTextColor(26, 35, 126); // Azul primário
+                doc.text("Manual da Missão: Identidade Visual", 20, 25);
+                
+                doc.setFontSize(12);
+                doc.setTextColor(100, 100, 100);
+                doc.text("Professor Johnny Braga de Oliveira - SENAI Morvan Figueiredo", 20, 35);
+                
+                doc.setDrawColor(233, 236, 239);
+                doc.line(20, 40, 190, 40);
+
+                // Seção O Desafio
+                doc.setFontSize(16);
+                doc.setTextColor(26, 35, 126);
+                doc.text("1. O Desafio", 20, 55);
+                
+                doc.setFontSize(11);
+                doc.setTextColor(50, 50, 50);
+                const challengeText = "Em duplas, um sera o Designer e o outro o Cliente. O objetivo e traduzir a personalidade, os valores e os sonhos do seu cliente em uma identidade visual completa e profissional. Depois, os papeis se invertem.";
+                doc.text(doc.splitTextToSize(challengeText, 170), 20, 65);
+
+                // Tabela de Fases
+                doc.setFontSize(16);
+                doc.setTextColor(26, 35, 126);
+                doc.text("2. As 4 Fases da Missao", 20, 85);
+                
+                autoTable(doc, {
+                  startY: 95,
+                  head: [['Fase', 'Descricao']],
+                  body: [
+                    ['1. A Descoberta', 'Entrevista profunda (briefing) e criacao do quadro Kanban.'],
+                    ['2. A Concepcao', 'Moodboard, criacao do logo, paleta e tipografia.'],
+                    ['3. A Revelacao', 'Apresentacao do projeto e justificativa das escolhas.'],
+                    ['4. A Virada', 'Inversao de papeis: o Designer vira Cliente e vice-versa.']
+                  ],
+                  headStyles: { fillColor: [26, 35, 126] },
+                });
+
+                // Critérios de Avaliação
+                const finalY = (doc as any).lastAutoTable.finalY || 150;
+                doc.setFontSize(16);
+                doc.setTextColor(26, 35, 126);
+                doc.text("3. Criterios de Avaliacao", 20, finalY + 20);
+                
+                doc.setFontSize(11);
+                doc.setTextColor(50, 50, 50);
+                const criteria = [
+                  "- Processo e Metodologia (Uso do Kanban)",
+                  "- Conceituacao (Cores e Gestalt)",
+                  "- Execucao Tecnica (Qualidade Visual)",
+                  "- Comunicacao (Apresentacao final)"
+                ];
+                criteria.forEach((text, i) => {
+                  doc.text(text, 20, finalY + 30 + (i * 8));
+                });
+
+                // Nota sobre Canva
+                doc.setFontSize(10);
+                doc.setTextColor(150, 150, 150);
+                doc.text("A entrega final deve ser feita preferencialmente no Canva.", 20, finalY + 70);
+
+                doc.save("Instrucoes-Missao-Identidade-Visual.pdf");
+              }}
+              className="px-8 py-4 rounded-xl font-bold bg-white text-foreground border border-border shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              <Download className="w-5 h-5" /> Baixar PDF
+            </button>
           </div>
         </section>
 
@@ -155,6 +231,78 @@ export default function Home() {
                   alt="Abstract Collaboration" 
                   className="rounded-3xl shadow-2xl relative z-10 border-4 border-white/10 object-cover aspect-video"
                 />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* EXEMPLO FICTÍCIO */}
+        <section className="py-24 bg-secondary/20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div className="order-2 lg:order-1">
+                <div className="bg-white rounded-3xl p-8 shadow-xl border border-border relative overflow-hidden">
+                  <div className="absolute top-0 right-0 bg-primary/10 px-4 py-2 rounded-bl-2xl text-primary font-bold text-xs uppercase tracking-wider">
+                    Exemplo de Entrega
+                  </div>
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <Palette className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold">Lumina Co.</h3>
+                      <p className="text-sm text-muted-foreground">Tecnologia & Sustentabilidade</p>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-6">
+                    <div>
+                      <h4 className="text-xs font-bold text-muted-foreground uppercase mb-2">Paleta de Cores</h4>
+                      <div className="flex gap-2">
+                        <div className="w-full h-12 rounded-lg bg-[#0F172A] flex items-end p-2"><span className="text-[10px] text-white opacity-50">#0F172A</span></div>
+                        <div className="w-full h-12 rounded-lg bg-[#38BDF8] flex items-end p-2"><span className="text-[10px] text-white opacity-50">#38BDF8</span></div>
+                        <div className="w-full h-12 rounded-lg bg-[#22C55E] flex items-end p-2"><span className="text-[10px] text-white opacity-50">#22C55E</span></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 className="text-xs font-bold text-muted-foreground uppercase mb-2">Tipografia</h4>
+                      <div className="p-4 bg-secondary/30 rounded-xl space-y-1">
+                        <p className="text-lg font-display font-bold">Montserrat Bold</p>
+                        <p className="text-sm font-sans">Inter Regular</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 className="text-xs font-bold text-muted-foreground uppercase mb-2">Conceito</h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed italic">
+                        "A Lumina utiliza o círculo para representar ciclos infinitos e sustentabilidade, com um raio de luz minimalista cruzando o centro para simbolizar inovação tecnológica."
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="order-1 lg:order-2">
+                <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6">Como será a entrega?</h2>
+                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                  Ao final da missão, você e sua dupla devem preparar uma apresentação no <strong>Canva</strong> ou ferramenta similar. 
+                  A entrega deve conter o logo, paleta, fontes e a justificativa baseada nos seus superpoderes aprendidos.
+                </p>
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center gap-4 group cursor-default">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+                      <FileText className="w-5 h-5" />
+                    </div>
+                    <span className="font-semibold">Documentação do Briefing</span>
+                  </div>
+                  <div className="flex items-center gap-4 group cursor-default">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+                      <Palette className="w-5 h-5" />
+                    </div>
+                    <span className="font-semibold">Apresentação da Identidade Visual</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
